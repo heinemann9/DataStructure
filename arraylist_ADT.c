@@ -9,30 +9,36 @@ typedef struct{
 	int length;
 } ArrayListType;
 
-void error(char *msg){
+void error(char *msg)
+{
 	fprintf(stderr,"%s\n",msg);
 	exit(1);
 }
 
-void init(ArrayListType *L){
+void init(ArrayListType *L)
+{
 	L->length = 0;
 }
 
-int is_empty(ArrayListType *L){
+int is_empty(ArrayListType *L)
+{
 	return L->length == 0;
 }
 
-int is_full(ArrayListType *L){
+int is_full(ArrayListType *L)
+{
 	return L->length == MAX_LIST_SIZE;
 }
 
-void display(ArrayListType *L){
+void display(ArrayListType *L)
+{
 	int i;
 	for(i = 0; i < L->length; i++)
 		printf("%d\n", L->list[i]);
 }
 
-void add(ArrayListType *L, int pos, element item){
+void add(ArrayListType *L, int pos, element item)
+{
 	if(!is_full(L) && (pos >= 0) && (pos <= L->length)){
 		int i;
 		for(i = (L->length-1); i >= pos; i--)
@@ -42,7 +48,8 @@ void add(ArrayListType *L, int pos, element item){
 	}
 }
 
-element delete(ArrayListType *L, int pos){
+element delete(ArrayListType *L, int pos)
+{
 	int i;
 	element item;
 	if(pos < 0 || pos >= L->length)
@@ -54,25 +61,29 @@ element delete(ArrayListType *L, int pos){
 	return item;
 }
 
-ArrayListType replace(ArrayListType *L, int pos, element item){
+ArrayListType replace(ArrayListType *L, int pos, element item)
+{
 	L->list[pos] = item;
-	return L;
+	return *L;
 }
 
-void get_entry(ArrayListTyp *L, int pos){
+void get_entry(ArrayListType *L, int pos)
+{
 	
 }
 
-int get_length(ArrayListType *L){
+int get_length(ArrayListType *L)
+{
 	return L->length;
 }
 
-void clear(ArrayListType *L){
+void clear(ArrayListType *L)
+{
 	free(L);
 }
 
-int main(int argc, char* argv[]){
-
+int main(int argc, char* argv[])
+{
 	ArrayListType list1;
 	ArrayListType *plist;
 
