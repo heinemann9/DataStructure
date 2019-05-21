@@ -5,6 +5,7 @@ using namespace std;
 
 typedef struct LinkedList
 {
+public:
     string item;
     LinkedList *next;
 

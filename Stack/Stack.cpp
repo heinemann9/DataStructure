@@ -2,41 +2,60 @@
 
 using namespace std;
 
-int *stack;
-int capacity = 5;
-int top = -1;
+class Stack
+{
+public:
+    int *item;
+    int capacity;
+    int top;
 
-bool isEmpty();
-bool isFull();
-bool push(int item);
-int pop();
-int peek();
+    Stack(int stack_size)
+    {
+        item = new int[stack_size];
+        capacity = stack_size;
+        top = -1;
+
+        for (int i = 0; i < stack_size; ++i)
+        {
+            this->push(i);
+        }
+    }
+
+    ~Stack()
+    {
+        delete []item;
+    }
+
+    bool isEmpty();
+    bool isFull();
+    bool push(int item);
+    int pop();
+    int peek();
+};
 
 int main(void)
 {
-    int value[] = {0, 1, 2, 3, 4};
-    stack = new int[capacity];
+    int stack_size = -1;
 
-    int i;
-    for (i = 0; i < sizeof(value)/sizeof(value[0]); ++i)
+    cout<<"stack_size:";
+    cin>>stack_size;
+
+    Stack *stack = new Stack(stack_size); 
+
+    cout<<"isFull: "<<((stack->isFull() == 1) ? "true" : "false")<<endl;
+    cout<<"isEmpty: "<<((stack->isEmpty() == 1) ? "true" : "false")<<endl;
+    cout<<"peek: "<<stack->peek()<<endl;
+    for (int i = 0 ; i < stack_size; ++i)
     {
-        push(value[i]);
+        cout<<"pop: "<<stack->pop()<<endl;
     }
-
-    cout<<"isFull: "<<((isFull() == 1) ? "true" : "false")<<endl;
-    cout<<"peek: "<<peek()<<endl;
-    cout<<"pop: "<<pop()<<endl;
-    cout<<"isFull: "<<((isFull() == 1) ? "true" : "false")<<endl;
-    cout<<"pop: "<<pop()<<endl;
-    cout<<"pop: "<<pop()<<endl;
-    cout<<"pop: "<<pop()<<endl;
-    cout<<"pop: "<<pop()<<endl;
-    cout<<"isEmpty: "<<((isEmpty() == 1) ? "true" : "false")<<endl;
+    cout<<"isFull: "<<((stack->isFull() == 1) ? "true" : "false")<<endl;
+    cout<<"isEmpty: "<<((stack->isEmpty() == 1) ? "true" : "false")<<endl;
 
     return 0;
 }
 
-bool isEmpty()
+bool Stack::isEmpty()
 {
     if (top == -1)
     {
@@ -48,7 +67,7 @@ bool isEmpty()
     }
 }
 
-bool isFull()
+bool Stack::isFull()
 {
     if (top == capacity - 1)
     {
@@ -61,33 +80,33 @@ bool isFull()
     
 }
 
-bool push(int item)
+bool Stack::push(int item)
 {
     if (isFull() == true)
     {
         return false;
     }
 
-    stack[++top] = item;
+    this->item[++top] = item;
     return true;
 }
 
-int pop()
+int Stack::pop()
 {
     if (isEmpty() == true)
     {
         throw -1;
     }
 
-    return stack[top--];
+    return item[top--];
 }
 
-int peek()
+int Stack::peek()
 {
     if (isEmpty() == true)
     {
         throw -1;
     }
 
-    return stack[top];
+    return item[top];
 }
